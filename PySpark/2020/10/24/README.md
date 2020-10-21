@@ -1,22 +1,22 @@
 # Event Title
 
-第 35 回 SQL Server 2019 勉強会
-35th SQL Server 2019 Study
+第 35 回 SQL Server 2019 勉強会  
+35th SQL Server 2019 Study  
 
 # Event Date
 
-2020 年 10 月 24 日 (土)
-October 24th, 2020 (Sat)
+2020 年 10 月 24 日 (土)  
+October 24th, 2020 (Sat)  
 
 # Session Title
 
-PySpark 入門
-PySpark Intro
+PySpark 入門  
+PySpark Intro  
 
 # Speaker Language
 
-日本語
-Japanese
+日本語  
+Japanese  
 
 # Related Repositories
 
