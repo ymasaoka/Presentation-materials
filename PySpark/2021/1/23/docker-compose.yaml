@@ -44,7 +44,7 @@ services:
   webserver:
     image: apache/airflow:2.0.0
     container_name: airflow-webserver
-    restart: always
+    restart: on-failure
     env_file:
       - .env
     ports:
@@ -55,5 +55,5 @@ services:
     volumes:
       - ./dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs
-    command: >
-      bash -c "airflow db init && airflow webserver -p 8080"
+    # command: db init # Use fist time only
+    command: webserver # Using with docker-compose up after exec `db init`
