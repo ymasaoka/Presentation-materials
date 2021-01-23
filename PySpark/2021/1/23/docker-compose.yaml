@@ -1,0 +1,59 @@
+version: '3'
+
+services:
+  pyodbc:
+    build: ./build/pyodbc
+    container_name: pyodbc
+    tty: true
+    volumes:
+      - ./src/app:/home/src
+      - ./pip-lib:/pip-lib
+    working_dir: "/home/src"
+    environment:
+      PYTHONUSERBASE: /pip-lib
+  
+  mssql:
+    image: mcr.microsoft.com/mssql/rhel/server:2019-latest
+    container_name: 'mssql2019-latest-rhel'
+    environment:
+      - MSSQL_SA_PASSWORD=databaseadmin@1
+      - ACCEPT_EULA=Y
+    ports:
+      - 1433:1433
+
+  postgres:
+    image: postgres:11
+    environment:
+      - POSTGRES_USER=airflow
+      - POSTGRES_PASSWORD=airflow
+      - POSTGRES_DB=airflow
+
+  scheduler:
+    image: apache/airflow:2.0.0
+    container_name: airflow-scheduler
+    restart: always
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+    command: scheduler
+
+  webserver:
+    image: apache/airflow:2.0.0
+    container_name: airflow-webserver
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - 8080:8080
+    depends_on:
+      - scheduler
+      - postgres
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+    command: >
+      bash -c "airflow db init && airflow webserver -p 8080"
