@@ -1,5 +1,8 @@
+#PySpark/2021/1/23
+PySpark/2021/1/23/AdventureWorks2019.bak
 PySpark/2021/1/23/build/airflow-pyodbc
 PySpark/2021/1/23/dags/__pycache__
+PySpark/2021/1/23/logs/*
 PySpark/2021/1/23/opt/airflow/*.cfg
 PySpark/2021/1/23/opt/airflow/*.db
 PySpark/2021/1/23/opt/airflow/*.err
@@ -8,7 +11,5 @@ PySpark/2021/1/23/opt/airflow/*.out
 PySpark/2021/1/23/opt/airflow/*.pid
 PySpark/2021/1/23/opt/airflow/*.py
 PySpark/2021/1/23/opt/airflow/logs
-
-PySpark/2021/1/23/logs/*
 PySpark/2021/1/23/pip-lib
 PySpark/2021/1/23/src
