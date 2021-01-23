@@ -23,6 +23,7 @@ Japanese
 - [ymasaoka/learn-pyspark](https://github.com/ymasaoka/learn-pyspark) - Chapter 4
 - [Apress/learn-pyspark](https://github.com/Apress/learn-pyspark) - Chapter 4
 - [ymasaoka/docker-airflow](https://github.com/ymasaoka/docker-airflow)
+- [laudio/airflow-etl-mssql-sample](https://github.com/laudio/airflow-etl-mssql-sample/blob/master/src/dags/init_etl_mssql.py)
 
 # Event URL
 
