@@ -1,6 +1,15 @@
 version: '3'
 
 services:
+  azurecli:
+    image: mcr.microsoft.com/azure-cli:latest
+    container_name: azure-cli
+    tty: true
+    volumes:
+      - ${HOME}/.ssh:/root/.ssh
+      - ./scripts:/home
+    working_dir: "/home"
+
   app:
     image: python:3.9
     container_name: python39-cosmos
@@ -13,7 +22,7 @@ services:
       PYTHONUSERBASE: /pip-lib
   
   postgres:
-    image: postgres:11
+    image: postgres:13
     environment:
       - POSTGRES_USER=airflow
       - POSTGRES_PASSWORD=airflow
