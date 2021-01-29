@@ -15,10 +15,10 @@ keyVaultName='SampleKV'
 
 
 # Define a variable to create a unique name
-randomNum=$RANDOM
-resourceGroupName=${resourceGroupName}${randomNum}
-cosmosAccountName=${cosmosAccountName}${randomNum}
-keyVaultName=${keyVaultName}${randomNum}
+uniqueNum=$RANDOM
+resourceGroupName=${resourceGroupName}${uniqueNum}
+cosmosAccountName=${cosmosAccountName}${uniqueNum}
+keyVaultName=${keyVaultName}${uniqueNum}
 
 # Log-in to Azure with device code (No use browser)
 echo 'Please sign-in to Azure...'
@@ -36,8 +36,8 @@ az group create --location $location \
 
 echo 'Completed.'
 
-# Create Azure Cosmos Account
-echo 'Creating Azure Cosmos Account...'
+# Create Azure Cosmos account
+echo 'Creating Azure Cosmos account...'
 
 az cosmosdb create --name $cosmosAccountName \
     --resource-group $resourceGroupName \
@@ -48,6 +48,19 @@ az cosmosdb create --name $cosmosAccountName \
     --enable-public-network true \
     --locations regionName=$location failoverPriority=$failoverPriority isZoneRedundant=$isZoneRedundant
 
+## List all Cosmos DB account keys
+echo 'Get Azure Cosmos account keys...'
+az cosmosdb keys list \
+    --name $cosmosAccountName \
+    --resource-group $resourceGroupName
+
+## List Cosmos DB connection strings
+echo 'Get Azure Cosmos account connection strings...'
+az cosmosdb keys list \
+    --name $cosmosAccountName \
+    --resource-group $resourceGroupName \
+    --type connection-strings
+
 echo 'Completed.'
 
 # Create Azure Key Vault
@@ -55,5 +68,19 @@ echo 'Creating Azure Key Vault...'
 
 az keyvault create --resource-group $resourceGroupName \
     --name $keyVaultName
+
+## Add a secret to Azure Key Vault
+echo 'Creating Azure Key Vault Secret...'
+echo 'Enter Azure Key Vault Secret name: '
+read cosmosSecretName
+echo 'Enter Azure Key Vault Secret value: '
+read cosmosSecretValue
+
+az keyvault secret set --vault-name $keyVaultName \
+    --name $cosmosSecretName \
+    --value $cosmosSecretValue
+
+az keyvault secret show --name $cosmosSecretName \
+    --vault-name $keyVaultName
 
 echo 'Completed.'
