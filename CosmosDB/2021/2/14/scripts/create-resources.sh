@@ -12,7 +12,8 @@ failoverPriority=0 # {0, 1}
 isZoneRedundant=false # {false, true}
 # Variables used to deploy Azure Key Vault
 keyVaultName='SampleKV'
-
+# Variables used to create service principle
+spName='python39cosmos'
 
 # Define a variable to create a unique name
 uniqueNum=$RANDOM
@@ -63,6 +64,13 @@ az cosmosdb keys list \
 
 echo 'Completed.'
 
+## Create Service Principle
+echo 'Creating Service Principle for Azure Key Vault...'
+az ad sp create-for-rbac --name $spName \
+    --skip-assignment
+
+echo 'Completed.'
+
 # Create Azure Key Vault
 echo 'Creating Azure Key Vault...'
 
@@ -75,6 +83,8 @@ echo 'Enter Azure Key Vault Secret name: '
 read cosmosSecretName
 echo 'Enter Azure Key Vault Secret value: '
 read cosmosSecretValue
+echo 'Enter appId as Azure Client ID : '
+read azureClientId
 
 az keyvault secret set --vault-name $keyVaultName \
     --name $cosmosSecretName \
@@ -82,5 +92,11 @@ az keyvault secret set --vault-name $keyVaultName \
 
 az keyvault secret show --name $cosmosSecretName \
     --vault-name $keyVaultName
+
+az keyvault set-policy --name $keyVaultName \
+    --spn $azureClientId \
+    --secret-permissions get set list delete backup recover restore purge \
+    --spn $spName \
+    --resource-group $resourceGroupName
 
 echo 'Completed.'
