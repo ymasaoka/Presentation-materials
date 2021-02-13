@@ -66,8 +66,7 @@ echo 'Completed.'
 
 ## Create Service Principle
 echo 'Creating Service Principle for Azure Key Vault...'
-rbacAppName = "http://${spName}"
-az ad sp create-for-rbac --name $rbacAppName \
+az ad sp create-for-rbac --name $spName \
     --skip-assignment
 
 echo 'Completed.'
