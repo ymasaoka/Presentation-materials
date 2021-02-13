@@ -9,7 +9,7 @@ defaultConsistencyLevel=Session # {BoundedStaleness, ConsistentPrefix, Eventual,
 enableAnalyticalStorage=true # {false, true}
 enableFreeTier=false # {false, true} = Cosmos DB の無償枠 (1サブスクリプションに1つのみ作成可能)
 failoverPriority=0 # {0, 1}
-isZoneRedundant=false # {false, true}
+isZoneRedundant=true # {false, true}
 # Variables used to deploy Azure Key Vault
 keyVaultName='SampleKV'
 # Variables used to create service principle
@@ -66,7 +66,8 @@ echo 'Completed.'
 
 ## Create Service Principle
 echo 'Creating Service Principle for Azure Key Vault...'
-az ad sp create-for-rbac --name $spName \
+rbacAppName = "http://${spName}"
+az ad sp create-for-rbac --name $rbacAppName \
     --skip-assignment
 
 echo 'Completed.'
@@ -96,7 +97,6 @@ az keyvault secret show --name $cosmosSecretName \
 az keyvault set-policy --name $keyVaultName \
     --spn $azureClientId \
     --secret-permissions get set list delete backup recover restore purge \
-    --spn $spName \
     --resource-group $resourceGroupName
 
 echo 'Completed.'
