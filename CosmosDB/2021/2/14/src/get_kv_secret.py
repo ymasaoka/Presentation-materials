@@ -15,7 +15,7 @@ secret_name = os.environ['SECRET_NAME_COSMOS']
 
 # Create Azure Credential
 cred = DefaultAzureCredential()
-secret_client = SecretClient(vault_url=kv_endpoint,credential=cred)
+secret_client = SecretClient(vault_url=kv_endpoint, credential=cred)
 
 # Get Azure Key Vault Secret
 retrieved_secret = secret_client.get_secret(secret_name)
