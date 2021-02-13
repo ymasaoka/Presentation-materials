@@ -16,12 +16,12 @@ kv_endpoint = f"https://{kv_name}.vault.azure.net"
 secret_name = os.environ['SECRET_NAME_COSMOS']
 
 cred = DefaultAzureCredential()
-secret_client = SecretClient(vault_url=kv_endpoint,credential=cred)
+secret_client = SecretClient(vault_url=kv_endpoint, credential=cred)
 
 retrieved_secret = secret_client.get_secret(secret_name)
 
 # Connect to Azure Cosmos DB
-cosmosAccountName = os.environ['COSMOS_ACCOUNT_NAME']
-url = f"https://{cosmosAccountName}.documents.azure.com:443/"
+cosmos_account = os.environ['COSMOS_ACCOUNT_NAME']
+url = f"https://{cosmos_account}.documents.azure.com:443/"
 client = CosmosClient(url, retrieved_secret.value)
-print(f"[{cosmosAccountName}] Connected successfully to Azure Cosmos DB account.")
+print(f"[{cosmos_account}] Connected successfully to Azure Cosmos DB account.")
