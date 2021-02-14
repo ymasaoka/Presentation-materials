@@ -1,0 +1,34 @@
+[
+  {
+    "id": "1",
+    "category": "main-character",
+    "name": "竈門 炭治郎",
+    "age": 15,
+    "height": 165,
+    "description": "妹を救い、家族の仇討ちを目指す、心優しい少年。鬼や相手の急所などの“匂い”を嗅ぎ分けることができる。",
+    "isAlive": true
+  },
+  {
+    "id": "2",
+    "category": "main-character",
+    "name": "竈門 禰󠄀豆子",
+    "age": 14,
+    "description": "炭治郎の妹。鬼に襲われ、鬼になってしまうが、他の鬼とは違い、人である炭治郎を守るよう動く。",
+    "isAlive": true
+  },
+  {
+    "id": "3",
+    "category": "enemy",
+    "name": "鬼舞辻 無惨",
+    "description": "禰󠄀豆子を鬼に変えた者で炭治郎の宿敵。普段は人間のふりをして暮らしている。",
+    "isAlive": true
+  },
+  {
+    "id": "4",
+    "category": "friend",
+    "name": "煉獄 杏寿郎",
+    "age": 20,
+    "description": "鬼殺隊の“柱”の一人。“炎の呼吸”で鬼を殲滅する。",
+    "isAlive": false
+  }
+]
