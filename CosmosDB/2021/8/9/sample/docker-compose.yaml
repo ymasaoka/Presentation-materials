@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  linux-emulator:
+    image: mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest
+    container_name: azure-cosmos-emulator
+    tty: true
+    ports:
+      - 8081:8081
+      - 10251:10251
+      - 10252:10252
+      - 10253:10253
+      - 10254:10254
+      - 10255:10255
+    environment:
+      - AZURE_COSMOS_EMULATOR_PARTITION_COUNT=10
+      - AZURE_COSMOS_EMULATOR_ENABLE_DATA_PERSISTENCE=true
+      - AZURE_COSMOS_EMULATOR_IP_ADDRESS_OVERRIDE=$ipaddr
+      - overrides='enableJsonPatch:true'
+    deploy: # Use these param at v3 & add `–compatibility` when compose up
+      resources:
+        limits:
+          cpus: "3.0"
+          memory: 6g
+
+  app:
+    image: mcr.microsoft.com/dotnet/sdk:3.1
+    container_name: docker-dotnetcore
+    tty: true
+    ports:
+      - 10080:80
+      - 10433:433
+    volumes:
+      - ./src:/usr/src
+      - ./usersecrets:/root/.microsoft/usersecrets
+    working_dir: "/usr/src"

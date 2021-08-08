@@ -3,6 +3,11 @@ CosmosDB/2021/2/14/dags/__pycache__
 CosmosDB/2021/2/14/data/postgresql/*
 CosmosDB/2021/2/14/logs/*
 CosmosDB/2021/2/14/pip-lib/*
+#CosmosDB/2021/8/9
+CosmosDB/2021/8/9/sample/emulatorcert.crt
+CosmosDB/2021/8/9/sample/src/bin
+CosmosDB/2021/8/9/sample/src/obj
+CosmosDB/2021/8/9/sample/usersecrets/*
 
 #PySpark/2021/1/23
 PySpark/2021/1/23/AdventureWorks2019.bak
