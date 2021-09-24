@@ -5,6 +5,7 @@ CosmosDB/2021/2/14/logs/*
 CosmosDB/2021/2/14/pip-lib/*
 #CosmosDB/2021/8/9
 CosmosDB/2021/8/9/sample/emulatorcert.crt
+CosmosDB/2021/8/9/sample/src/.vs
 CosmosDB/2021/8/9/sample/src/bin
 CosmosDB/2021/8/9/sample/src/obj
 CosmosDB/2021/8/9/sample/usersecrets/*
